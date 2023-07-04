@@ -1,14 +1,16 @@
 QUESTIONS
-  -what is the best way to go about collecting user input and dislaying that on page.
-  -can you slash through text in bootstrap/JS or only CSS
-  -Can i fit all user determined spaces into one file?-> active/completed/all
-  -how can local storagre and usestate be manipulted to streamline functions/vars
+
+    -what is the best way to go about collecting user input and dislaying that on page.
+    -can you slash through text in bootstrap/JS or only CSS
+    -Can i fit all user determined spaces into one file?-> active/completed/all
+    -how can local storagre and usestate be manipulted to streamline functions/vars
 
 
 
 MoSCoW
 
   Must haves
+   
     -a text box for user input
     -a dynamic display of user inputs
     -a check box as well as visual representation of user inout being "removed"
@@ -19,16 +21,19 @@ MoSCoW
     -differentiation between soft/hard delete
 
   Should have
+   
     -local storage
       -persistent state through reloads of the page
 
   Could have
+   
     - user determined priority in list
     - log in feature to store tasks long term
     - editable feature to update list/correct errors
     - "new" status
 
   Wont have
+   
     - API call
     - outside app compatability
 
@@ -36,6 +41,7 @@ MoSCoW
 
 
   AGILE STORIES/KANBAN
+     
      - as a user I want to be able to type in a task for my to do list
      - as a user I want to see my tasks displayed on the page
      - as a user I want to be able to check off completed items
