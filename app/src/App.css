@@ -1,14 +1,13 @@
 /* Main container */
 .todo-app {
-  margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  padding: 10px;
-
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
 }
 
 /* Task input and add button */
-.task-input {
+.user-input {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -19,7 +18,7 @@
   display: block;
   width: 100%;
   padding: 8px;
-  background-color: #4caf50;
+  background-color: #4374b5;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -28,26 +27,30 @@
 }
 
 .add-task-btn:hover {
-  background-color: #45a049;
+  background-color: #4374b5;
 }
 
 /* Filter buttons */
 .filter-btns {
   margin-bottom: 10px;
+  padding: 8px;
+  display: block;
+  margin-left: 85px;
 }
 
 .filter-btns button {
   padding: 6px 10px;
   margin-right: 5px;
-  background-color: #4caf50;
+  background-color: #000000;
   color: #fff;
   border: none;
   cursor: pointer;
   font-size: 14px;
+  position: center;
 }
 
 .filter-btns button.active {
-  background-color: #45a049;
+  background-color: #5aba74;
 }
 
 /* Task list */

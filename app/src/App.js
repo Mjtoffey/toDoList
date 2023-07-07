@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import UserInput from './UserInput';
 import TaskList from './TaskList';
 import ViewFilter from './ViewFilter';
+import './App.css'
 //imports all components into app to be rendered together
 
 const App = () => {
@@ -53,20 +54,22 @@ const App = () => {
       const filteredTasks = filterTasks(tasks, filter);
     
       return (
-        <div className="todo-app" class="conatiner" align="center">
-          <UserInput
-            inputValue={inputValue}
-            handleInputChange={handleInputChange}
-            handleFormSubmit={handleFormSubmit}
-          />
-          <ViewFilter
-            filter={filter}
-            handleFilterChange={handleFilterChange}
-          />
-          <TaskList
-            tasks={filteredTasks}
-            handleTaskClick={handleTaskClick}
-          />
+        <div className="container d-flex justify-content-center">
+            <div className="todo-app">
+            <UserInput
+                inputValue={inputValue}
+                handleInputChange={handleInputChange}
+                handleFormSubmit={handleFormSubmit}
+            />
+            <ViewFilter
+                filter={filter}
+                handleFilterChange={handleFilterChange}
+            />
+            <TaskList
+                tasks={filteredTasks}
+                handleTaskClick={handleTaskClick}
+            />
+            </div>
         </div>
       );
     };
