@@ -56,6 +56,7 @@ const App = () => {
       return (
         <div className="container d-flex justify-content-center">
             <div className="todo-app">
+            <h2 className="header">To Do List</h2>
             <UserInput
                 inputValue={inputValue}
                 handleInputChange={handleInputChange}
