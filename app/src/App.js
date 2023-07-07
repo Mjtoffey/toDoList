@@ -1,59 +1,85 @@
-import React, { useState } from "react";
-import "./App.css";
-import TodoForm from "./TodoForm";
-import TodoList from "./TodoList";
+import React, { useState, useEffect } from 'react';
+import UserInput from './UserInput';
+import TaskList from './TaskList';
+import ViewFilter from './ViewFilter';
+//imports all components into app to be rendered together
 
-function App() {
-  const [todos, setTodos] = useState([]);
+const App = () => {
+    const [tasks, setTasks] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+    const [filter, setFilter] = useState('all');
 
-  const addTodo = (text) => {
-    let id = 1;
-    if(todos.length > 0) {
-      id = todos[0].id + 1
-    }
-    let todo = {id: id, text: text, completed: false, important: false}
-    let newTodos = [todo, ...todos]
-    setTodos(newTodos)
-  };
+    useEffect(() => {
+        const storedTasks = localStorage.getItem('tasks');  //stores tasks in localStorage 
+        if (storedTasks) {
+          setTasks(JSON.parse(storedTasks));
+        }
+      }, []);
 
-  const removeTodo = (id) => {
-    let updatedTodos = [...todos].filter((todo) => todo.id !== id);
-    setTodos(updatedTodos);
-  };
+      useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+      }, [tasks]);
+    
+      const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+      };
 
-  const completeTodo = (id) => {
-    let updatedTodos = todos.map((todo) => {
-      if(todo.id === id) {
-        todo.completed = !todo.completed
+      const handleFormSubmit = (e) => {
+        e.preventDefault();
+        if (inputValue.trim() !== '') {
+          const newTask = {
+            id: Date.now(),
+            title: inputValue,
+            completed: false,
+          };
+          setTasks([...tasks, newTask]);
+          setInputValue('');
+        }
+      };
+      const handleTaskClick = (taskId) => {
+        const updatedTasks = tasks.map((task) => {
+          if (task.id === taskId) {
+            return { ...task, completed: !task.completed };
+          }
+          return task;
+        });
+        setTasks(updatedTasks);
+      };
+    
+      const handleFilterChange = (newFilter) => {
+        setFilter(newFilter);
+      };
+    
+      const filteredTasks = filterTasks(tasks, filter);
+    
+      return (
+        <div className="todo-app" class="conatiner" align="center">
+          <UserInput
+            inputValue={inputValue}
+            handleInputChange={handleInputChange}
+            handleFormSubmit={handleFormSubmit}
+          />
+          <ViewFilter
+            filter={filter}
+            handleFilterChange={handleFilterChange}
+          />
+          <TaskList
+            tasks={filteredTasks}
+            handleTaskClick={handleTaskClick}
+          />
+        </div>
+      );
+    };
+    
+    const filterTasks = (tasks, filter) => {
+      switch (filter) {
+        case 'active':
+          return tasks.filter((task) => !task.completed);
+        case 'completed':
+          return tasks.filter((task) => task.completed);
+        default:
+          return tasks;
       }
-      return todo
-    })
-    setTodos(updatedTodos)
-  }
-
-  const importantTodo = (id) => {
-    let updatedTodos = todos.map((todo) => {
-      if(todo.id === id) {
-        todo.important = !todo.important
-      }
-      return todo
-    })
-
-    setTodos(updatedTodos)
-  }
-  let sortedTodos = todos.sort((a, b) => b.important - a.important)
-  return (
-    <div className="todo-app">
-      <h1>Todo List</h1>
-      <TodoForm addTodo={addTodo} />
-      <hr className="seperator"/>
-      {sortedTodos.map((todo) => {
-        return (
-          <TodoList removeTodo={removeTodo} completeTodo={completeTodo} importantTodo={importantTodo} todo={todo} key={todo.id}/>
-        )
-      })}
-    </div>
-  );
-}
-
-export default App;
+    };
+    
+    export default App;
